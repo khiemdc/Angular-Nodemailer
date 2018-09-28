@@ -4,7 +4,7 @@ const request = require('request');
 const nodemailer = require('nodemailer');
 
 router.post('/send', (req, res) => {
-    console.log('What???');
+    console.log('What??? Toi Day chua?');
     const outputData = `
     <p>You have a new contact request</p>
     <h3>Contact Details</h3>
@@ -30,10 +30,32 @@ router.post('/send', (req, res) => {
     });
 
     var mailOptions = {
-        from: "khiemledc@gmail.com",
-        to: "vapnews1@gmail.com",
-        subject: "Nodejs Mail",
-        text: "this is the email's body text..."
+        from: "donotreply@deea.thebuffalogroup.com",
+        to: "khiemledc@gmail.com",
+        //to: 'BoggsW@deea.thebuffalogroup.com, WhitlockC@deea.thebuffalogroup.com, BasraD@deea.thebuffalogroup.com, KideY@deea.thebuffalogroup.com, LeK@deea.thebuffalogroup.com',
+        subject: 'New Message From: ' + req.body.name,
+        // text: "this is the email's body text..."
+
+    text:
+      'From ' +
+      req.body.name +
+      '\nEmail: ' +
+      req.body.email +
+      '\nMessage: ' +
+        req.body.message +
+        '\n' +
+        '\n' +
+        'This email and any attachment(s) are from The PMO Tracker Development (Cool)Team and are intended only for fun chat :) It may contain information that you may not interested. If you have received this communication in error, please ignore it :)',
+    
+    // html:
+    //   'From: ' +
+    //   req.body.name  +
+    //   '<h4>Email: </h4>' +
+    //   req.body.email +
+    //   '<p>    ' +
+    //   req.body.message +
+    //   '</p>',
+  
     };
     
     transporter.sendMail(mailOptions, function(error, info) {
